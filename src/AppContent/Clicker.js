@@ -60,9 +60,7 @@ export default function Clicker({ statsIsOpen, shopIsOpen }) {
             clickBoost={clickBoost}
           />
         )}
-        <div id="contentBody">
-          <div id="clicker" onClick={incrementClick}></div>
-        </div>
+        <div id="clicker" onClick={incrementClick}></div>
         {shopIsOpen && (
           <div id="shop">
             <h2>Shop:</h2>

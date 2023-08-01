@@ -55,14 +55,13 @@ body {
   flex-direction: column;
   margin: 10% 20% 0 20%;
   box-shadow: 2px 2px 4px rgb(78, 78, 78);
-  #top {
+  h1 {
+    margin: 0;
+    padding: 10px 0 10px 0;
     background-color: rgb(56, 56, 56);
-    display: flex;
-    justify-content: center;
-    h1 {
-      color: rgb(8, 168, 8);
-      text-shadow: 1px 1px 32px #ffffff;
-    }
+    text-align: center;
+    color: rgb(8, 168, 8);
+    text-shadow: 1px 1px 32px #ffffff;
   }
   input {
     margin: 10px;
