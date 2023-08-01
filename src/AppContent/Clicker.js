@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import '../style.scss';
+import React, { useState } from 'react';
+import Stats from '../UI/Stats';
 import Shop from './Shop';
 import Upgrades from './Upgrades';
-import Stats from '../UI/Stats';
+import './AppContentStyles.scss';
 
-export default function Clicker() {
+export default function Clicker({ statsIsOpen}) {
   let [count, setCount] = useState(0);
   let [cPS, setCPS] = useState(0);
   let [countModifier, setCountModifier] = useState(1);
@@ -37,23 +37,28 @@ export default function Clicker() {
 
   return (
     <>
-      <Stats count={count} cPS={cPS} countModifier={countModifier} />
-      <div id="contentBody">
-        <div id="mainClick">
-          <button onClick={incrementCount}> CLICKER </button>
+      <div id="display">
+      {statsIsOpen && (
+        <Stats count={count} cPS={cPS} countModifier={countModifier} />
+      )}
+        <div id="contentBody">
+          <div id="clicker" onClick={incrementCount}></div>
+          <div id="shop">
+            <h2>Shop:</h2>
+            <Shop
+              handleIncrementation={handleIncrementation}
+              handlePurchases={handlePurchases}
+              count={count}
+              handleCPS={handleCPS}
+            />
+            <Upgrades
+              count={count}
+              handleIncrementation={handleIncrementation}
+              handlePurchases={handlePurchases}
+              handleUpgrades={handleUpgrades}
+            />
+          </div>
         </div>
-        <Shop
-          handleIncrementation={handleIncrementation}
-          handlePurchases={handlePurchases}
-          count={count}
-          handleCPS={handleCPS}
-        />
-        <Upgrades
-          count={count}
-          handleIncrementation={handleIncrementation}
-          handlePurchases={handlePurchases}
-          handleUpgrades={handleUpgrades}
-        />
       </div>
     </>
   );

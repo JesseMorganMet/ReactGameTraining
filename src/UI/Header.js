@@ -1,11 +1,23 @@
 import React from 'react';
-import '../style.scss';
 
-export default function Header({ toggle, title }) {
+export default function Header({ toggle, title, statsToggle }) {
   return (
     <>
-      <p id="header">{title}</p>
-      <p id="toggle" onClick={toggle}>Edit Name</p>
+      <div id="header">
+        <h1>{title}</h1>
+        <p id="toggle" onClick={toggle}>
+          Edit Name
+        </p>
+        <div id="menus">
+          <p onClick={statsToggle}>Stats</p>
+          <p>option</p>
+          <p>option</p>
+          <p>option</p>
+          <p>option</p>
+          <p>option</p>
+          <p>option</p>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../style.scss';
 
 export default function ButtonStuff() {
   let [count, setCount] = useState(0);

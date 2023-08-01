@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../style.scss';
 
 export default function TitleMenu({ toggle, changeTitle, title }) {
   return (

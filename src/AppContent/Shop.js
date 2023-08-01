@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../style.scss';
 
 export default function Shop({ handleIncrementation, count, handleCPS, handlePurchases}) {
   let [autoAmount, setAutoAmount] = useState(0);
@@ -34,17 +33,14 @@ export default function Shop({ handleIncrementation, count, handleCPS, handlePur
 
   return (
     <>
-      <section className="shop">
-        <h2>Shop:</h2>
-        <div className="card">
-          <h2>Incrementors</h2>
-          <div className="info">
-            <p>Owned : {autoAmount} </p>
-            <p>Value : {autoValue} </p>
-            <button onClick={buyAutoAdd}>Purchase</button>
-          </div>
+      <div className="card">
+        <h2>Incrementors:</h2>
+        <div className="info">
+          <p>Owned : {autoAmount} </p>
+          <p>Value : {autoValue} </p>
+          <button onClick={buyAutoAdd}>Purchase</button>
         </div>
-      </section>
+      </div>
     </>
   );
 }

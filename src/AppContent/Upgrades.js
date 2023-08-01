@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../style.scss';
 
 export default function Upgrades({ count, handleUpgrades, handlePurchases }){
   let [upgradeCost, setUpgradeCost] = useState(20);
@@ -15,15 +14,14 @@ export default function Upgrades({ count, handleUpgrades, handlePurchases }){
 
   return (
     <>
-      <section className="shop">
+      <div className="card">
         <h2>Upgrades:</h2>
-        <div className="card">
-          <div className="info">
-            <p>upgrade1 : {upgradeCost} </p>
-            <button onClick={buyUpgrade}>Purchase</button>
-          </div>
+        <div className="info">
+          <p>Multipliers </p>
+          <p>Value : {upgradeCost} </p>
+          <button onClick={buyUpgrade}>Purchase</button>
         </div>
-      </section>
+      </div>
     </>
   );
 }
