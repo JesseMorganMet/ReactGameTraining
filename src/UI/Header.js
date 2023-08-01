@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ toggle, title, statsToggle }) {
+export default function Header({ toggle, title, statsToggle, shopToggle }) {
   return (
     <>
       <div id="header">
@@ -10,7 +10,7 @@ export default function Header({ toggle, title, statsToggle }) {
         </p>
         <div id="menus">
           <p onClick={statsToggle}>Stats</p>
-          <p>option</p>
+          <p onClick={shopToggle}>Shop</p>
           <p>option</p>
           <p>option</p>
           <p>option</p>

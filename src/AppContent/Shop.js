@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export default function Shop({ handleIncrementation, count, handleCPS, handlePurchases}) {
+export default function Shop({ handleIncrementation, click, handleCPS, handlePurchases}) {
   let [autoAmount, setAutoAmount] = useState(0);
   let [autoValue, setAutoValue] = useState(10);
   const [start, setStart] = useState(false);
@@ -22,7 +22,7 @@ export default function Shop({ handleIncrementation, count, handleCPS, handlePur
   }, [start, autoAmount]);
 
   const buyAutoAdd = () => {
-    if (count >= autoValue) {
+    if (click >= autoValue) {
       handlePurchases(-autoValue);
       setAutoValue((autoValue = autoValue * 1.5));
       setStart(true);
@@ -37,9 +37,9 @@ export default function Shop({ handleIncrementation, count, handleCPS, handlePur
         <h2>Incrementors:</h2>
         <div className="info">
           <p>Owned : {autoAmount} </p>
-          <p>Value : {autoValue} </p>
-          <button onClick={buyAutoAdd}>Purchase</button>
+          <p id="purchase" onClick={buyAutoAdd}>Purchase ({autoValue}c)</p>
         </div>
+        <p id="desc">Increase your CPS by 0.2c per second</p>
       </div>
     </>
   );

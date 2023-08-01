@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 export default function ButtonStuff() {
-  let [count, setCount] = useState(0);
+  let [click, setClick] = useState(0);
   let [autoAmount, setAutoAmount] = useState(0);
   let [autoValue, setAutoValue] = useState(10);
   const [start, setStart] = useState(false);
@@ -12,9 +12,9 @@ export default function ButtonStuff() {
     if (start) {
       clearInterval(timerIdRef.current);
       timerIdRef.current = setInterval(() => {
-        setCount((count) => {
-          console.log(count);
-          return count + autoAmount * 0.2;
+        setClick((click) => {
+          console.log(click);
+          return click + autoAmount * 0.2;
         });
       }, 2000);
     } else {
@@ -25,13 +25,13 @@ export default function ButtonStuff() {
     };
   }, [start, autoAmount]);
 
-  const incrementCount = () => {
-    setCount(count + 1);
+  const incrementClick = () => {
+    setClick(click + 1);
   };
 
   const buyAutoAdd = () => {
-    if (count >= autoValue) {
-      setCount(count - autoValue);
+    if (click >= autoValue) {
+      setClick(click - autoValue);
       setAutoValue((autoValue = autoValue * 1.5));
       setStart(true);
       setAutoAmount((autoAmount = autoAmount + 1));
@@ -40,9 +40,8 @@ export default function ButtonStuff() {
 
   return (
     <>
-      <button onClick={incrementCount}> CLICK </button>
-      <h1>Count: {Math.round(count * 100) / 100}</h1>
-
+      <button onClick={incrementClick}> CLICK </button>
+      <h1>Clicks : {Math.round(click * 100) / 100}</h1>
       <button onClick={buyAutoAdd}>BUY AUTO</button>
       <h1>Auto Amount:{autoAmount}</h1>
       <h1>Auto Value:{autoValue}</h1>

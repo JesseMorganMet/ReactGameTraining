@@ -2,63 +2,87 @@ import React, { useState } from 'react';
 import Stats from '../UI/Stats';
 import Shop from './Shop';
 import Upgrades from './Upgrades';
+import Resources from './Resources';
 import './AppContentStyles.scss';
 
-export default function Clicker({ statsIsOpen}) {
-  let [count, setCount] = useState(0);
+export default function Clicker({ statsIsOpen, shopIsOpen }) {
+  let [click, setClick] = useState(0);
+  let [bigClick, setBigClick] = useState(0);
   let [cPS, setCPS] = useState(0);
-  let [countModifier, setCountModifier] = useState(1);
+  let [clickModifier, setClickModifier] = useState(1);
+  let [clickBoost, setClickBoost] = useState(1);
   const val = 0;
 
-  const incrementCount = () => {
-    setCount(count + 1);
+  const incrementClick = () => {
+    setClick(click + clickBoost);
+  };
+
+  const incrementBigClick = () => {
+    setClick(click - 100);
+    setBigClick(bigClick + 1);
   };
 
   function handleIncrementation(val) {
-    setCount((count) => {
-      return count + val * countModifier;
+    setClick((click) => {
+      return click + val * clickModifier;
     });
   }
   function handlePurchases(val) {
-    setCount((count) => {
-      return count + val;
+    setClick((click) => {
+      return click + val;
     });
   }
 
   function handleCPS(currentCPS) {
-    setCPS((cPS = currentCPS * countModifier));
+    setCPS((cPS = currentCPS * clickModifier));
   }
 
   function handleUpgrades(val) {
-    setCountModifier((countModifier) => {
-      return countModifier + val;
+    setClickModifier((clickModifier) => {
+      return clickModifier + val;
     });
+  }
+
+  function handleClickBoost(val) {
+    setClickBoost(clickBoost + 1);
+    setBigClick(bigClick - val);
   }
 
   return (
     <>
       <div id="display">
-      {statsIsOpen && (
-        <Stats count={count} cPS={cPS} countModifier={countModifier} />
-      )}
+        {statsIsOpen && (
+          <Stats
+            click={click}
+            bigClick={bigClick}
+            cPS={cPS}
+            clickModifier={clickModifier}
+            clickBoost={clickBoost}
+          />
+        )}
         <div id="contentBody">
-          <div id="clicker" onClick={incrementCount}></div>
+          <div id="clicker" onClick={incrementClick}></div>
+        </div>
+        {shopIsOpen && (
           <div id="shop">
             <h2>Shop:</h2>
             <Shop
+              click={click}
               handleIncrementation={handleIncrementation}
               handlePurchases={handlePurchases}
-              count={count}
               handleCPS={handleCPS}
             />
             <Upgrades
-              count={count}
+              click={click}
+              bigClick={bigClick}
               handleIncrementation={handleIncrementation}
               handlePurchases={handlePurchases}
               handleUpgrades={handleUpgrades}
+              handleClickBoost={handleClickBoost}
             />
+            <Resources click={click} incrementBigClick={incrementBigClick} />
           </div>
-        </div>
+        )}
       </div>
     </>
   );
