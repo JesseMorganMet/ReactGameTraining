@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Header({ toggle, title, statsToggle, shopToggle }) {
+export default function Header({ toggle, title, statsToggle, shopToggle, saveClicked }) {
   return (
     <>
       <div id="header">
@@ -11,7 +11,7 @@ export default function Header({ toggle, title, statsToggle, shopToggle }) {
         <div id="menus">
           <p onClick={statsToggle}>Stats</p>
           <p onClick={shopToggle}>Shop</p>
-          <p>option</p>
+          <p onClick={saveClicked}>Save</p>
           <p>option</p>
           <p>option</p>
           <p>option</p>

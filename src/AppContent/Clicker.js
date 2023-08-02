@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stats from '../UI/Stats';
 import Shop from './Shop';
 import Upgrades from './Upgrades';
 import Resources from './Resources';
 import './AppContentStyles.scss';
 
-export default function Clicker({ statsIsOpen, shopIsOpen }) {
+export default function Clicker({ statsIsOpen, shopIsOpen, saveClicked }) {
+  let [save, setSave] = useState([]);
   let [click, setClick] = useState(0);
   let [bigClick, setBigClick] = useState(0);
   let [cPS, setCPS] = useState(0);
   let [clickModifier, setClickModifier] = useState(1);
   let [clickBoost, setClickBoost] = useState(1);
   const val = 0;
+
+  useEffect(() => {
+      getValues()
+  }, [saveClicked]);
+
+  function getValues() {
+    setSave(
+      (save = {
+        save: [
+          {
+            click: click,
+            bigClick: bigClick,
+            cPS: cPS,
+            clickModifier: clickModifier,
+            clickBoost: clickBoost,
+          },
+        ],
+      })
+    );
+    console.log(save)
+    return save;
+  }
 
   const incrementClick = () => {
     setClick(click + clickBoost);
