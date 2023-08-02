@@ -6,7 +6,7 @@ export default function Upgrades({
   handleClickBoost,
   handleUpgrades,
   upgradeCost,
-  upgrade
+  upgrade,
 }) {
   function buyUpgrade() {
     handleUpgrades();
