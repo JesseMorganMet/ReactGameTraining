@@ -1,0 +1,16 @@
+{
+  "save": [
+    {
+      "click": 10000,
+      "bigClick": 1000,
+      "cPS": 0.2,
+      "clickModifier": 5,
+      "clickBoost": 5,
+      "clickBoostCost": 1,
+      "upgradeCost": 20,
+      "bigClickCost": 100,
+      "autoAmount": 0,
+      "autoValue": 5,
+    }
+  ]
+}

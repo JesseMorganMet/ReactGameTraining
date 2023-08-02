@@ -1,30 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Upgrades({
-  click,
-  handleUpgrades,
-  handlePurchases,
+  clickBoost,
+  clickBoostCost,
   handleClickBoost,
-  bigClick,
+  handleUpgrades,
+  upgradeCost,
+  upgrade
 }) {
-  let [upgradeCost, setUpgradeCost] = useState(20);
-  let [clickBoostCost, setClickBoostCost] = useState(1);
-  let upgrade = 1;
-  let clickBoost = 1;
-
   function buyUpgrade() {
-    if (click >= upgradeCost) {
-      handleUpgrades(upgrade);
-      handlePurchases(-upgradeCost);
-      setUpgradeCost((upgradeCost = upgradeCost * 3.5));
-    }
+    handleUpgrades();
   }
 
   function buyClickBoost() {
-    if (bigClick >= clickBoostCost) {
-      handleClickBoost(clickBoost);
-      setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
-    }
+    handleClickBoost();
   }
 
   return (

@@ -10,6 +10,7 @@ export default function App() {
   const [statsIsOpen, setStatsIsOpen] = useState(true);
   const [shopIsOpen, setShopIsOpen] = useState(true);
   const [clickSave, setClickSave] = useState(true);
+  const [loading, setLoading] = useState(true);
   let [title, setTitle] = useState('Subtle on brand CHEMET title');
 
   function toggle() {
@@ -31,6 +32,9 @@ export default function App() {
   function saveClicked() {
     setClickSave((clickSave) => !clickSave);
   }
+  function saveLoading() {
+    setLoading((loading) => !loading);
+  }
 
   return (
     <>
@@ -40,6 +44,7 @@ export default function App() {
         statsToggle={statsToggle}
         shopToggle={shopToggle}
         saveClicked={saveClicked}
+        saveLoading={saveLoading}
       />
       {isOpen && (
         <TitleMenu toggle={toggle} changeTitle={changeTitle} title={title} />
@@ -49,6 +54,7 @@ export default function App() {
           statsIsOpen={statsIsOpen}
           shopIsOpen={shopIsOpen}
           saveClicked={saveClicked}
+          loading={loading}
         />
       </main>
       <Footer />
