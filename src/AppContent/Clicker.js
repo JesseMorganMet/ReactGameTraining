@@ -31,6 +31,7 @@ export default function Clicker({
   let upgrade = 1;
 
   //would be a fetch if i could fetch
+  // Sorting out savedata
   useEffect(() => {
     if (loading == false) {
       setValues(save1.save[0]);
@@ -80,6 +81,7 @@ export default function Clicker({
     console.log(save);
     return save;
   }
+  // Sorting out savedata
 
   // Standard If Clicker is Clicked
   const incrementClick = () => {
