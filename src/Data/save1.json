@@ -10,7 +10,8 @@
       "upgradeCost": 20,
       "bigClickCost": 100,
       "autoAmount": 0,
-      "autoValue": 5,
+      "autoValue": 5
     }
   ]
 }
+
