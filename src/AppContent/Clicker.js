@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Stats from '../UI/Stats';
 import Shop from './Shop';
 import Upgrades from './Upgrades';
@@ -6,200 +6,212 @@ import Resources from './Resources';
 import save1 from '../Data/save1.json';
 import './AppContentStyles.scss';
 
-export default function Clicker({
-  statsIsOpen,
-  shopIsOpen,
-  saveClicked,
-  loading,
-}) {
-  let [save, setSave] = useState([]);
-  let [click, setClick] = useState(0);
-  let [bigClick, setBigClick] = useState(0);
-  let [cPS, setCPS] = useState(0);
-  let [clickModifier, setClickModifier] = useState(1);
-  let [clickBoost, setClickBoost] = useState(1);
+export default function Clicker ({
+									 statsIsOpen,
+									 shopIsOpen,
+									 saveClicked,
+									 loading,
+								 }) {
+	let [save, setSave] = useState([]);
+	let [click, setClick] = useState(0);
+	let [bigClick, setBigClick] = useState(0);
+	let [cPS, setCPS] = useState(0);
+	let [clickModifier, setClickModifier] = useState(1);
+	let [clickBoost, setClickBoost] = useState(1);
 
-  let [clickBoostCost, setClickBoostCost] = useState(1);
-  let [upgradeCost, setUpgradeCost] = useState(20);
-  let [bigClickCost, setBigClickCost] = useState(100);
-  let [autoAmount, setAutoAmount] = useState(0);
-  let [autoValue, setAutoValue] = useState(10);
+	let [clickBoostCost, setClickBoostCost] = useState(1);
+	let [upgradeCost, setUpgradeCost] = useState(20);
+	let [bigClickCost, setBigClickCost] = useState(100);
+	let [autoAmount, setAutoAmount] = useState(0);
+	let [autoValue, setAutoValue] = useState(10);
 
-  let [start, setStart] = useState(false);
+	let [start, setStart] = useState(false);
 
-  const timerIdRef = useRef(null);
-  let upgrade = 1;
+	const timerIdRef = useRef(null);
+	let upgrade = 1;
 
-  //would be a fetch if i could fetch
-  // Sorting out savedata
-  useEffect(() => {
-    if (loading == false) {
-      setValues(save1.save[0]);
-      getValues(save);
-    }
-  }, [loading]);
+	//would be a fetch if i could fetch
+	// Sorting out savedata
+	useEffect(() => {
+		if (loading == false) {
+			setValues(save1.defaultCosts[0]);
+			getValues(save);
+		}
+	}, [loading]);
 
-  useEffect(() => {
-    getValues();
-  }, [saveClicked]);
+	useEffect(() => {
+		getValues();
+	}, [saveClicked]);
 
-  function setValues(data) {
-    setClick((click = data.click));
-    setBigClick((bigClick = data.bigClick));
-    setCPS((cPS = data.cPS));
-    setClickModifier((clickModifier = data.clickModifier));
-    setClickBoost((clickBoost = data.clickBoost));
-    setStart((start = data.start));
+	function setValues (data) {
+		setClick((click = data.click));
+		setBigClick((bigClick = data.bigClick));
+		setCPS((cPS = data.cPS));
+		setClickModifier((clickModifier = data.clickModifier));
+		setClickBoost((clickBoost = data.clickBoost));
+		setStart((start = data.start));
 
-    setClickBoostCost((clickBoostCost = data.clickBoostCost));
-    setUpgradeCost((upgradeCost = data.upgradeCost));
-    setBigClickCost((bigClickCost = data.bigClickCost));
-    setAutoAmount((autoAmount = data.autoAmount));
-    setAutoValue((autoValue = data.autoAmount));
+		setClickBoostCost((clickBoostCost = data.clickBoostCost));
+		setUpgradeCost((upgradeCost = data.upgradeCost));
+		setBigClickCost((bigClickCost = data.bigClickCost));
+		setAutoAmount((autoAmount = data.autoAmount));
+		setAutoValue((autoValue = data.autoAmount));
 
-    if(data.start){
-      setCPS((cPS = autoAmount * 0.2 * clickModifier));
-    }
+		if (data.start) {
+			setAutoValue((autoValue = autoValue * 1.5));
+			setCPS((cPS = autoAmount * 0.2 * clickModifier));
+			if (clickModifier > 1) {
+				setUpgradeCost((upgradeCost = upgradeCost * 3.5));
+			}
+			if (clickBoost > 1) {
+				setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
+			}
+			console.log("stuff")
+		}
 
-    getValues();
-  }
+		getValues();
+	}
 
-  function getValues() {
-    setSave(
-      (save = {
-        save: [
-          {
-            click: click,
-            bigClick: bigClick,
-            cPS: cPS,
-            clickModifier: clickModifier,
-            clickBoost: clickBoost,
-            clickBoostCost: clickBoostCost,
-            upgradeCost: upgradeCost,
-            bigClickCost: bigClickCost,
-            autoAmount: autoAmount,
-            autoValue: autoValue,
-            start: start,
-          },
-        ],
-      })
-    );
-    console.log(save);
-    return save;
-  }
-  // Sorting out savedata
+	function getValues () {
+		setSave(
+			(save = {
+				save: [
+					{
+						click: click,
+						bigClick: bigClick,
+						cPS: cPS,
+						clickModifier: clickModifier,
+						clickBoost: clickBoost,
+						clickBoostCost: clickBoostCost,
+						upgradeCost: upgradeCost,
+						bigClickCost: bigClickCost,
+						autoAmount: autoAmount,
+						autoValue: autoValue,
+						start: start,
+					},
+				],
+			})
+		);
+		console.log(save);
+		return save;
+	}
 
-  // Standard If Clicker is Clicked
-  const incrementClick = () => {
-    setClick(click + clickBoost);
-  };
-  // Standard If Clicker is Clicked
+	// Sorting out savedata
 
-  // Big Click Stuff
-  const incrementBigClick = () => {
-    if (click >= bigClickCost) {
-      setClick(click - 100);
-      setBigClick(bigClick + 1);
-    }
-  };
-  // Big Click Stuff
+	// Standard If Clicker is Clicked
+	const incrementClick = () => {
+		setClick(click + clickBoost);
+	};
+	// Standard If Clicker is Clicked
 
-  // Shop
-  function handleIncrementation(val) {
-    setClick((click) => {
-      return click + val * clickModifier;
-    });
-  }
+	// Big Click Stuff
+	const incrementBigClick = () => {
+		if (click >= bigClickCost) {
+			setClick(click - 100);
+			setBigClick(bigClick + 1);
+		}
+	};
+	// Big Click Stuff
 
-  function handleCPS() {
-    if (click >= autoValue) {
-      handlePurchases(autoValue);
-      setAutoValue((autoValue = autoValue * 1.5));
-      setStart(true);
-      setAutoAmount((autoAmount = autoAmount + 1));
-      setCPS((cPS = autoAmount * 0.2 * clickModifier));
-    }
-  }
+	// Shop
+	function handleIncrementation (val) {
+		setClick((click) => {
+			return click + val * clickModifier;
+		});
+	}
 
-  useEffect(() => {
-    if (start) {
-      clearInterval(timerIdRef.current);
-      timerIdRef.current = setInterval(() => {
-        return handleIncrementation(autoAmount * 0.2);
-      }, 1000);
-    } else {
-      clearInterval(timerIdRef.current);
-    }
-    return () => {
-      clearInterval(timerIdRef.current);
-    };
-  }, [start, autoAmount, loading]);
-  // Shop
+	function handleCPS () {
+		if (click >= autoValue) {
+			handlePurchases(autoValue);
+			setAutoValue((autoValue = autoValue * 1.5));
+			setStart(true);
+			setAutoAmount((autoAmount = autoAmount + 1));
+			setCPS((cPS = autoAmount * 0.2 * clickModifier));
+		}
+	}
 
-  // Generic Purchase
-  function handlePurchases(val) {
-    setClick((click) => {
-      return click - val;
-    });
-  }
-  // Generic Purchase
+	useEffect(() => {
+		if (start) {
+			clearInterval(timerIdRef.current);
+			timerIdRef.current = setInterval(() => {
+				return handleIncrementation(autoAmount * 0.2);
+			}, 1000);
+		} else {
+			clearInterval(timerIdRef.current);
+		}
+		return () => {
+			clearInterval(timerIdRef.current);
+		};
+	}, [start, autoAmount, loading]);
+	// Shop
 
-  //Upgrade Stuff
-  function handleUpgrades() {
-    if (click >= upgradeCost) {
-      setClickModifier((clickModifier = clickModifier + upgrade));
-      handlePurchases(upgradeCost);
-      setUpgradeCost((upgradeCost = upgradeCost * 3.5));
-    }
-  }
-  //Upgrade Stuff
+	// Generic Purchase
+	function handlePurchases (val) {
+		setClick((click) => {
+			return click - val;
+		});
+	}
 
-  //ClickBoost Stuff
-  function handleClickBoost() {
-    if (bigClick >= clickBoostCost) {
-      setClickBoost(clickBoost + 1);
-      setBigClick(bigClick - clickBoost);
-      setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
-    }
-  }
-  //ClickBoost Stuff
+	// Generic Purchase
 
-  return (
-    <>
-      <div id="display">
-        {statsIsOpen && (
-          <Stats
-            click={click}
-            bigClick={bigClick}
-            cPS={cPS}
-            clickModifier={clickModifier}
-            clickBoost={clickBoost}
-          />
-        )}
-        <div id="clicker" onClick={incrementClick}></div>
-        {shopIsOpen && (
-          <div id="shop">
-            <h2>Shop:</h2>
-            <Shop
-              handleCPS={handleCPS}
-              autoAmount={autoAmount}
-              autoValue={autoValue}
-            />
-            <Upgrades
-              clickBoost={clickBoost}
-              clickBoostCost={clickBoostCost}
-              handleClickBoost={handleClickBoost}
-              handleUpgrades={handleUpgrades}
-              upgradeCost={upgradeCost}
-              upgrade={upgrade}
-            />
-            <Resources
-              bigClickCost={bigClickCost}
-              incrementBigClick={incrementBigClick}
-            />
-          </div>
-        )}
-      </div>
-    </>
-  );
+	//Upgrade Stuff
+	function handleUpgrades () {
+		if (click >= upgradeCost) {
+			setClickModifier((clickModifier = clickModifier + upgrade));
+			handlePurchases(upgradeCost);
+			setUpgradeCost((upgradeCost = upgradeCost * 3.5));
+		}
+	}
+
+	//Upgrade Stuff
+
+	//ClickBoost Stuff
+	function handleClickBoost () {
+		if (bigClick >= clickBoostCost) {
+			setClickBoost(clickBoost + 1);
+			setBigClick(bigClick - clickBoost);
+			setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
+		}
+	}
+
+	//ClickBoost Stuff
+
+	return (
+		<>
+			<div id="display">
+				{statsIsOpen && (
+					<Stats
+						click={click}
+						bigClick={bigClick}
+						cPS={cPS}
+						clickModifier={clickModifier}
+						clickBoost={clickBoost}
+					/>
+				)}
+				<div id="clicker" onClick={incrementClick}></div>
+				{shopIsOpen && (
+					<div id="shop">
+						<h2>Shop:</h2>
+						<Shop
+							handleCPS={handleCPS}
+							autoAmount={autoAmount}
+							autoValue={autoValue}
+						/>
+						<Upgrades
+							clickBoost={clickBoost}
+							clickBoostCost={clickBoostCost}
+							handleClickBoost={handleClickBoost}
+							handleUpgrades={handleUpgrades}
+							upgradeCost={upgradeCost}
+							upgrade={upgrade}
+						/>
+						<Resources
+							bigClickCost={bigClickCost}
+							incrementBigClick={incrementBigClick}
+						/>
+					</div>
+				)}
+			</div>
+		</>
+	);
 }
