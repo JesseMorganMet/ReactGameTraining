@@ -25,7 +25,7 @@ export default function Clicker({
   let [autoAmount, setAutoAmount] = useState(0);
   let [autoValue, setAutoValue] = useState(10);
 
-  const [start, setStart] = useState(false);
+  let [start, setStart] = useState(false);
 
   const timerIdRef = useRef(null);
   let upgrade = 1;
@@ -49,12 +49,17 @@ export default function Clicker({
     setCPS((cPS = data.cPS));
     setClickModifier((clickModifier = data.clickModifier));
     setClickBoost((clickBoost = data.clickBoost));
+    setStart((start = data.start));
 
     setClickBoostCost((clickBoostCost = data.clickBoostCost));
     setUpgradeCost((upgradeCost = data.upgradeCost));
     setBigClickCost((bigClickCost = data.bigClickCost));
     setAutoAmount((autoAmount = data.autoAmount));
     setAutoValue((autoValue = data.autoAmount));
+
+    if(data.start){
+      setCPS((cPS = autoAmount * 0.2 * clickModifier));
+    }
 
     getValues();
   }
@@ -74,6 +79,7 @@ export default function Clicker({
             bigClickCost: bigClickCost,
             autoAmount: autoAmount,
             autoValue: autoValue,
+            start: start,
           },
         ],
       })
@@ -127,7 +133,7 @@ export default function Clicker({
     return () => {
       clearInterval(timerIdRef.current);
     };
-  }, [start, autoAmount]);
+  }, [start, autoAmount, loading]);
   // Shop
 
   // Generic Purchase
@@ -175,12 +181,9 @@ export default function Clicker({
           <div id="shop">
             <h2>Shop:</h2>
             <Shop
-              handleIncrementation={handleIncrementation}
-              handlePurchases={handlePurchases}
               handleCPS={handleCPS}
               autoAmount={autoAmount}
               autoValue={autoValue}
-              start={start}
             />
             <Upgrades
               clickBoost={clickBoost}

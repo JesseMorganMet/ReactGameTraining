@@ -9,8 +9,9 @@
       "clickBoostCost": 1,
       "upgradeCost": 20,
       "bigClickCost": 100,
-      "autoAmount": 0,
-      "autoValue": 5
+      "autoAmount": 10,
+      "autoValue": 5,
+      "start": true
     }
   ]
 }
