@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import Header from './UI/Header';
+import {Header, Footer, TitleMenu} from './UI';
 import Clicker from './AppContent/Clicker';
-import TitleMenu from './AppContent/TitleMenu';
-import Footer from './UI/Footer';
 import './style.scss';
 
 export default function App() {

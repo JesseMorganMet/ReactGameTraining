@@ -1,6 +1,7 @@
 import React from 'react';
+import "./UIStyles.scss";
 
-export default function Header({
+export function Header({
   toggle,
   title,
   statsToggle,

@@ -1,8 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import Stats from '../UI/Stats';
-import Shop from './Shop';
-import Upgrades from './Upgrades';
-import Resources from './Resources';
+import {Stats, Shop} from '../UI/index';
 import save1 from '../Data/save1.json';
 import './AppContentStyles.scss';
 
@@ -190,26 +187,21 @@ export default function Clicker ({
 				)}
 				<div id="clicker" onClick={incrementClick}></div>
 				{shopIsOpen && (
-					<div id="shop">
-						<h2>Shop:</h2>
-						<Shop
-							handleCPS={handleCPS}
-							autoAmount={autoAmount}
-							autoValue={autoValue}
-						/>
-						<Upgrades
-							clickBoost={clickBoost}
-							clickBoostCost={clickBoostCost}
-							handleClickBoost={handleClickBoost}
-							handleUpgrades={handleUpgrades}
-							upgradeCost={upgradeCost}
-							upgrade={upgrade}
-						/>
-						<Resources
-							bigClickCost={bigClickCost}
-							incrementBigClick={incrementBigClick}
-						/>
-					</div>
+					<Shop
+						handleCPS={handleCPS}
+						autoAmount={autoAmount}
+						autoValue={autoValue}
+
+						clickBoost={clickBoost}
+						clickBoostCost={clickBoostCost}
+						handleClickBoost={handleClickBoost}
+						handleUpgrades={handleUpgrades}
+						upgradeCost={upgradeCost}
+						upgrade={upgrade}
+
+						bigClickCost={bigClickCost}
+						incrementBigClick={incrementBigClick}
+					/>
 				)}
 			</div>
 		</>
