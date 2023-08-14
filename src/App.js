@@ -1,61 +1,195 @@
-import React, { useState } from 'react';
-import {Header, Footer, TitleMenu} from './UI';
+import React, {useEffect, useRef, useState} from 'react';
+import {Header, Footer, Settings, Shop, Stats} from './UI';
 import Clicker from './AppContent/Clicker';
 import './style.scss';
+import save1 from './Data/save1.json';
 
-export default function App() {
-  const [isOpen, setIsOpen] = useState(true);
-  const [statsIsOpen, setStatsIsOpen] = useState(true);
-  const [shopIsOpen, setShopIsOpen] = useState(true);
-  const [clickSave, setClickSave] = useState(true);
-  const [loading, setLoading] = useState(true);
-  let [title, setTitle] = useState('Subtle on brand CHEMET title');
+export default function App () {
+	const [isTitleMenuOpen, setTitleMenuOpen] = useState(true);
+	const [isStatsOpen, setIsStatsOpen] = useState(true);
+	const [isShopOpen, setIsShopOpen] = useState(true);
+	let [title, setTitle] = useState('Subtle on brand CHEMET title');
 
-  function toggle() {
-    setIsOpen((isOpen) => !isOpen);
-  }
+	let [click, setClick] = useState(0);
+	let [bigClick, setBigClick] = useState(0);
+	let [cPS, setCPS] = useState(0);
+	let [clickModifier, setClickModifier] = useState(1);
+	let [clickBoost, setClickBoost] = useState(1);
 
-  function changeTitle(newTitle) {
-    setTitle((title = newTitle));
-  }
+	let [clickBoostCost, setClickBoostCost] = useState(1);
+	let [upgradeCost, setUpgradeCost] = useState(20);
+	let bigClickCost = 100;
+	let [autoAmount, setAutoAmount] = useState(0);
+	let [autoValue, setAutoValue] = useState(10);
 
-  function statsToggle() {
-    setStatsIsOpen((statsIsOpen) => !statsIsOpen);
-  }
+	let [start, setStart] = useState(false);
 
-  function shopToggle() {
-    setShopIsOpen((shopIsOpen) => !shopIsOpen);
-  }
+	const timerIdRef = useRef(null);
+	let upgrade = 1;
 
-  function saveClicked() {
-    setClickSave((clickSave) => !clickSave);
-  }
-  function saveLoading() {
-    setLoading((loading) => !loading);
-  }
+	//menu Toggles
+	const titleMenuToggle = () => {
+		setTitleMenuOpen((isTitleMenuOpen) => !isTitleMenuOpen)
+	}
+	const statsToggle = () => {
+		setIsStatsOpen((isStatsOpen) => !isStatsOpen)
+	}
+	const shopToggle = () => {
+		setIsShopOpen((isShopOpen) => !isShopOpen)
+	}
 
-  return (
-    <>
-      <Header
-        toggle={toggle}
-        title={title}
-        statsToggle={statsToggle}
-        shopToggle={shopToggle}
-        saveClicked={saveClicked}
-        saveLoading={saveLoading}
-      />
-      {isOpen && (
-        <TitleMenu toggle={toggle} changeTitle={changeTitle} title={title} />
-      )}
-      <main>
-        <Clicker
-          statsIsOpen={statsIsOpen}
-          shopIsOpen={shopIsOpen}
-          saveClicked={saveClicked}
-          loading={loading}
-        />
-      </main>
-      <Footer />
-    </>
-  );
+	//menu Toggles
+
+	function changeTitle (newTitle) {
+		setTitle(title = newTitle);
+	}
+
+	//would be a fetch if i could fetch
+
+	// Big Click Stuff
+	const incrementBigClick = () => {
+		if (click >= bigClickCost) {
+			handlePurchases(bigClickCost);
+			setBigClick(bigClick + 1);
+		}
+	};
+	// Big Click Stuff
+
+	// Shop
+	function handleIncrementation (val) {
+		setClick((click) => {
+			return click + val * clickModifier;
+		});
+	}
+
+	function handleCPS () {
+		if (click >= autoValue) {
+			handlePurchases(autoValue);
+			setAutoValue((autoValue = autoValue * 1.5));
+			setStart(true);
+			setAutoAmount((autoAmount = autoAmount + 1));
+			setCPS((cPS = autoAmount * 0.2 * clickModifier));
+		}
+	}
+
+	useEffect(() => {
+		if (start) {
+			clearInterval(timerIdRef.current);
+			timerIdRef.current = setInterval(() => {
+				return handleIncrementation(autoAmount * 0.2);
+			}, 1000);
+		} else {
+			clearInterval(timerIdRef.current);
+		}
+		return () => {
+			clearInterval(timerIdRef.current);
+		};
+	}, [start, autoAmount]);
+	// Shop
+
+	// Generic Purchase
+	function handlePurchases (val) {
+		setClick((click) => {
+			return click - val;
+		});
+	}
+
+	// Generic Purchase
+
+	//Upgrade Stuff
+	function handleUpgrades () {
+		if (click >= upgradeCost) {
+			setClickModifier((clickModifier = clickModifier + upgrade));
+			handlePurchases(upgradeCost);
+			setUpgradeCost((upgradeCost = upgradeCost * 3.5));
+		}
+	}
+
+	//Upgrade Stuff
+
+	//ClickBoost Stuff
+	function handleClickBoost () {
+		if (bigClick >= clickBoostCost) {
+			setClickBoost(clickBoost + 1);
+			setBigClick(bigClick - clickBoost);
+			setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
+		}
+	}
+
+	//ClickBoost Stuff
+
+	return (
+		<>
+			<Header
+				titleMenuToggle={titleMenuToggle}
+				title={title}
+				statsToggle={statsToggle}
+				shopToggle={shopToggle}
+			/>
+			{isTitleMenuOpen &&
+				<Settings titleMenuToggle={titleMenuToggle}
+						  changeTitle={changeTitle}
+						  title={title}
+						  setTitle={setTitle}
+						  click={click}
+						  setClick={setClick}
+						  bigClick={bigClick}
+						  setBigClick={setBigClick}
+						  cPS={cPS}
+						  setCPS={setCPS}
+						  clickModifier={clickModifier}
+						  setClickModifier={setClickModifier}
+						  clickBoost={clickBoost}
+						  setClickBoost={setClickBoost}
+						  clickBoostCost={clickBoostCost}
+						  setClickBoostCost={setClickBoostCost}
+						  upgradeCost={upgradeCost}
+						  setUpgradeCost={setUpgradeCost}
+						  autoAmount={autoAmount}
+						  setAutoAmount={setAutoAmount}
+						  autoValue={autoValue}
+						  setAutoValue={setAutoValue}
+						  start={start}
+						  setStart={setStart}
+				/>
+			}
+			<main>
+				<div id="display">
+					{isStatsOpen && (
+						<Stats
+							click={click}
+							bigClick={bigClick}
+							cPS={cPS}
+							clickModifier={clickModifier}
+							clickBoost={clickBoost}
+						/>
+					)}
+					<Clicker
+						click={click}
+						setClick={setClick}
+						clickBoost={clickBoost}
+					/>
+					{isShopOpen && (
+						<Shop
+							handleCPS={handleCPS}
+							autoAmount={autoAmount}
+							autoValue={autoValue}
+
+							clickBoost={clickBoost}
+							clickBoostCost={clickBoostCost}
+							handleClickBoost={handleClickBoost}
+							handleUpgrades={handleUpgrades}
+							upgradeCost={upgradeCost}
+							upgrade={upgrade}
+
+							bigClickCost={bigClickCost}
+							incrementBigClick={incrementBigClick}
+						/>
+					)}
+
+				</div>
+			</main>
+			<Footer/>
+		</>
+	);
 }

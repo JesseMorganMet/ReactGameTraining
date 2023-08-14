@@ -3,6 +3,14 @@ h2{
   text-shadow: 1px 1px 12px #ffffff;
 }
 
+#contentBody {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 #clicker {
   margin: 40px auto 40px auto;
   width: 20em;
@@ -40,3 +48,18 @@ h2{
   }
 }
 
+#activeDisplay{
+  display: flex;
+  justify-content: space-around;
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+  background-color: white;
+  z-index: -1;
+  border-top: black 2em solid;
+
+  p{
+    font-weight: bold;
+    font-size: 3em;
+  }
+}

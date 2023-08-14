@@ -1,6 +1,7 @@
 {
-  "defaultCosts": [
+  "default":
     {
+      "title": "default",
       "click": 10000,
       "bigClick": 1000,
       "cPS": 0,
@@ -11,8 +12,7 @@
       "bigClickCost": 100,
       "autoAmount": 0,
       "autoValue": 10,
-      "start": true
+      "start": false
     }
-  ]
 }
 

@@ -80,6 +80,10 @@
 		text-align: center;
 		padding: 4px;
 	}
+	button{
+		margin: 5% 10% 5% 10% ;
+		padding:5%;
+	}
 }
 
 #display {
@@ -107,12 +111,6 @@
 		}
 	}
 
-	#contentBody {
-		width: 100vw;
-		height: auto;
-		display: flex;
-		flex-direction: column;
-	}
 }
 
 #shop {
