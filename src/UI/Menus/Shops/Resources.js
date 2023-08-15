@@ -12,7 +12,7 @@ export function Resources({ incrementBigClick, bigClickCost }) {
         <div className="info">
           <p>Big Clicks : </p>
           <p id="purchase" onClick={buyBigClick}>
-            Purchase ({bigClickCost}c)
+            {bigClickCost}c
           </p>
         </div>
         <p id="desc">Like clicks just bigger</p>

@@ -23,7 +23,7 @@ export function Upgrades({
         <div className="info">
           <p>Multipliers : </p>
           <p id="purchase" onClick={buyUpgrade}>
-            Purchase ({Math.round(upgradeCost * 100) / 100}c)
+           {Math.round(upgradeCost * 100) / 100}c
           </p>
         </div>
         <p id="desc">Increase your CPS multiplier by {upgrade}</p>
@@ -31,7 +31,7 @@ export function Upgrades({
         <div className="info">
           <p>Click Boost : </p>
           <p id="purchase" onClick={buyClickBoost}>
-            Purchase ({Math.round(clickBoostCost * 100) / 100}bc)
+            {Math.round(clickBoostCost * 100) / 100}bc
           </p>
         </div>
         <p id="desc">Increase your clicks per click by {clickBoost}</p>

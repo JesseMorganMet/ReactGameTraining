@@ -59,7 +59,7 @@ export default function App () {
 	// Shop
 	function handleIncrementation (val) {
 		setClick((click) => {
-			return click + val * clickModifier;
+			return click + val;
 		});
 	}
 

@@ -19,8 +19,8 @@ export function Shop ({
 
 	return (
 		<>
-			<div id="shop">
-				<h2>Shop:</h2>
+			<div id="shop" className="hangRight">
+				<h2>Shop</h2>
 				<Incrementors
 					handleCPS={handleCPS}
 					autoValue={autoValue}

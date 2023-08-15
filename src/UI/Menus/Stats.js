@@ -12,28 +12,30 @@ export function Stats ({
 					   }) {
 	return (
 		<>
-			<div id="stats">
+			<div id="shop" className="hangLeft">
 				<h2>Stats</h2>
-				<div>
+				<div className="card">
 					<h2>Resources</h2>
-					<p>Clicks : {Math.round(click * 100) / 100}c</p>
-					<p id="desc">+ {Math.round(cPS * 100) / 100} /s</p>
-					<p>Big Clicks : {bigClick}bc</p>
+					<div id="desc">
+						<p>Clicks : {Math.round(click * 100) / 100}c</p>
+						<p className="indent">+{Math.round(cPS * 100) / 100}/s</p>
+						<p>Big Clicks : {bigClick}bc</p>
+					</div>
 				</div>
-				<div>
+				<div className="card">
 					<h2>Incrementors</h2>
-					<p>Small: {autoAmount} ({Math.round((autoAmount * 0.2) * 100) / 100}cps)</p>
-					<p>Medium: {mediumAutoAmount} ({Math.round((mediumAutoAmount * 0.6) * 100) / 100}cps)</p>
+					<div id="desc">
+						<p>Small: {autoAmount} ({Math.round((autoAmount * 0.2) * 100) / 100}cps)</p>
+						<p>Medium: {mediumAutoAmount} ({Math.round((mediumAutoAmount * 0.6) * 100) / 100}cps)</p>
+					</div>
 				</div>
-				<div>
+				<div className="card">
 					<h2>Upgrades</h2>
-					<p>Click Boost: {clickBoost}</p>
-					<p>Multipliers: {clickModifier}</p>
+					<div id="desc">
+						<p>Click Boost: {clickBoost}</p>
+						<p>Multipliers: {clickModifier}</p>
+					</div>
 				</div>
-				<p>x</p>
-				<p>x</p>
-				<p>x</p>
-				<p>x</p>
 			</div>
 		</>
 	);
