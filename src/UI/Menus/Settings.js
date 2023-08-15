@@ -26,13 +26,19 @@ export function Settings ({
 							  autoValue,
 							  setAutoValue,
 							  start,
-							  setStart
+							  setStart,
+							  mediumAutoAmount,
+							  setMediumAutoAmount,
+							  mediumAutoValue,
+							  setMediumAutoValue,
 						  }) {
 
 	let [save, setSave] = useState([]);
-	let data = save1.default
 
-	function setSaveData () {
+	function setSaveData (val) {
+
+		let data = val;
+
 		setTitle((title = data.title));
 		setClick((click = data.click));
 		setBigClick((bigClick = data.bigClick));
@@ -46,22 +52,11 @@ export function Settings ({
 		setAutoAmount((autoAmount = data.autoAmount));
 		setAutoValue((autoValue = data.autoValue));
 
-		//not needed after real algorithm is made +/ real savedata
-		if (data.start) {
-			setAutoValue((autoValue = autoValue * 1.5));
-			setCPS((cPS = autoAmount * 0.2 * clickModifier));
-			if (clickModifier > 1) {
-				setUpgradeCost((upgradeCost = upgradeCost * 3.5));
-			}
-			if (clickBoost > 1) {
-				setClickBoostCost((clickBoostCost = clickBoostCost * 3.5));
-			}
-			console.log("stuff")
-		}
-
-		getSaveData();
+		setMediumAutoAmount((mediumAutoAmount = data.mediumAutoAmount));
+		setMediumAutoValue((mediumAutoValue = data.mediumAutoValue));
 	}
 
+	//Needs to write to "save 1-3"
 	function getSaveData () {
 		setSave(
 			(save = {
@@ -78,36 +73,47 @@ export function Settings ({
 						autoAmount: autoAmount,
 						autoValue: autoValue,
 						start: start,
+						mediumAutoAmount: mediumAutoAmount,
+						mediumAutoValue: mediumAutoValue
 					},
 				],
 			})
 		);
 		console.log(save);
-		return save;
 	}
 
 	// Sorting out savedata
 
 	return (
 		<>
-			<section className="titleMenu">
+			<section className="settings">
 				<h3 id="toggle" onClick={titleMenuToggle}>
 					X
 				</h3>
-				<h1>Please enter a name</h1>
-				<input
-					type="text"
-					id="titleChange"
-					name="titleChange"
-					value={title}
-					onChange={(event) => changeTitle(event.target.value)}
-				/>
-				<h1>Save</h1>
-				<button onClick={getSaveData}/>
-				<h1>Load</h1>
-				<div>
-					<p>File one</p>
-					<button onClick={setSaveData}> {data.title} </button>
+				<h1>Settings Menu</h1>
+				<div id="options">
+					<div id="option">
+						<h2>Change Name : </h2>
+						<input
+							type="text"
+							id="titleChange"
+							name="titleChange"
+							value={title}
+							onChange={(event) => changeTitle(event.target.value)}
+						/>
+					</div>
+					<div id="option">
+						<h2>Save : </h2>
+						<button onClick={getSaveData}> Save 1 : {save1.save1.title} </button>
+						<button onClick={getSaveData}> Save 2 : {save1.save2.title} </button>
+						<button onClick={getSaveData}> Save 3 : {save1.save3.title} </button>
+					</div>
+					<div id="option">
+						<h2>Load : </h2>
+						<button onClick={()=>setSaveData(save1.save1)}> Save 1 : {save1.save1.title} </button>
+						<button onClick={()=>setSaveData(save1.save2)}> Save 2 : {save1.save2.title} </button>
+						<button onClick={()=>setSaveData(save1.save3)}> Save 3 : {save1.save3.title} </button>
+					</div>
 				</div>
 			</section>
 		</>

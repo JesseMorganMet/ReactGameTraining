@@ -1,9 +1,9 @@
 {
-  "default":
+  "save1":
     {
       "title": "default",
-      "click": 10000,
-      "bigClick": 1000,
+      "click": 0,
+      "bigClick": 0,
       "cPS": 0,
       "clickModifier": 1,
       "clickBoost": 1,
@@ -12,7 +12,42 @@
       "bigClickCost": 100,
       "autoAmount": 0,
       "autoValue": 10,
-      "start": false
-    }
+      "start": false,
+      "mediumAutoAmount": 0,
+      "mediumAutoValue": 200
+    },
+  "save2":
+  {
+    "title": "save2",
+    "click": 10000,
+    "bigClick": 1000,
+    "cPS": 0,
+    "clickModifier": 1,
+    "clickBoost": 1,
+    "clickBoostCost": 1,
+    "upgradeCost": 20,
+    "bigClickCost": 100,
+    "autoAmount": 0,
+    "autoValue": 10,
+    "start": false,
+    "mediumAutoAmount": 0,
+    "mediumAutoValue": 200
+  },
+  "save3":
+  {
+    "autoAmount": 20,
+    "autoValue": 33252.56730079651,
+    "bigClick": 99955,
+    "cPS": 40,
+    "click": 303495.756023407,
+    "clickBoost": 10,
+    "clickBoostCost": 78815.638671875,
+    "clickModifier": 10,
+    "start": true,
+    "title": "save3 (True Data)",
+    "upgradeCost": 1576312.7734375,
+    "mediumAutoAmount": 16,
+    "mediumAutoValue": 131368.1671142578
+  }
 }
 

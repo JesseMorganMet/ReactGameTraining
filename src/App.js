@@ -21,6 +21,8 @@ export default function App () {
 	let bigClickCost = 100;
 	let [autoAmount, setAutoAmount] = useState(0);
 	let [autoValue, setAutoValue] = useState(10);
+	let [mediumAutoAmount, setMediumAutoAmount] = useState(0);
+	let [mediumAutoValue, setMediumAutoValue] = useState(200);
 
 	let [start, setStart] = useState(false);
 
@@ -62,21 +64,40 @@ export default function App () {
 		});
 	}
 
+	// Generic Purchase
+	function handlePurchases (val) {
+		setClick((click) => {
+			return click - val;
+		});
+	}
+	// Generic Purchase
+
 	function handleCPS () {
 		if (click >= autoValue) {
 			handlePurchases(autoValue);
 			setAutoValue((autoValue = autoValue * 1.5));
-			setStart(true);
 			setAutoAmount((autoAmount = autoAmount + 1));
-			setCPS((cPS = autoAmount * 0.2 * clickModifier));
+			handleRealCPS()
 		}
+	}
+	function handleMediumCPS() {
+		if (click >= mediumAutoValue) {
+			handlePurchases(mediumAutoValue);
+			setMediumAutoValue((mediumAutoValue = mediumAutoValue * 1.5));
+			setMediumAutoAmount((mediumAutoAmount = mediumAutoAmount + 1));
+			handleRealCPS()
+		}
+	}
+	function handleRealCPS () {
+		setStart(true);
+		setCPS((cPS = (mediumAutoAmount * 0.6) + (autoAmount * 0.2) * clickModifier))
 	}
 
 	useEffect(() => {
 		if (start) {
 			clearInterval(timerIdRef.current);
 			timerIdRef.current = setInterval(() => {
-				return handleIncrementation(autoAmount * 0.2);
+				return handleIncrementation((autoAmount * 0.2) + (mediumAutoAmount * 0.6));
 			}, 1000);
 		} else {
 			clearInterval(timerIdRef.current);
@@ -86,15 +107,6 @@ export default function App () {
 		};
 	}, [start, autoAmount]);
 	// Shop
-
-	// Generic Purchase
-	function handlePurchases (val) {
-		setClick((click) => {
-			return click - val;
-		});
-	}
-
-	// Generic Purchase
 
 	//Upgrade Stuff
 	function handleUpgrades () {
@@ -151,6 +163,10 @@ export default function App () {
 						  setAutoValue={setAutoValue}
 						  start={start}
 						  setStart={setStart}
+						  mediumAutoAmount={mediumAutoAmount}
+						  setMediumAutoAmount={setMediumAutoAmount}
+						  mediumAutoValue={mediumAutoValue}
+						  setMediumAutoValue={setMediumAutoValue}
 				/>
 			}
 			<main>
@@ -159,6 +175,8 @@ export default function App () {
 						<Stats
 							click={click}
 							bigClick={bigClick}
+							autoAmount={autoAmount}
+							mediumAutoAmount={mediumAutoAmount}
 							cPS={cPS}
 							clickModifier={clickModifier}
 							clickBoost={clickBoost}
@@ -172,8 +190,9 @@ export default function App () {
 					{isShopOpen && (
 						<Shop
 							handleCPS={handleCPS}
-							autoAmount={autoAmount}
 							autoValue={autoValue}
+							handleMediumCPS={handleMediumCPS}
+							mediumAutoValue={mediumAutoValue}
 
 							clickBoost={clickBoost}
 							clickBoostCost={clickBoostCost}

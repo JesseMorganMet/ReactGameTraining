@@ -3,18 +3,19 @@ import "../../UIStyles.scss";
 import {Incrementors, Upgrades, Resources} from '../../index';
 
 export function Shop ({
-	autoAmount,
-	autoValue,
-	handleCPS,
-	clickBoost,
-	clickBoostCost,
-	handleClickBoost,
-	handleUpgrades,
-	upgradeCost,
-	upgrade,
-	incrementBigClick,
-	bigClickCost
-}) {
+						  autoValue,
+						  handleCPS,
+						  clickBoost,
+						  clickBoostCost,
+						  handleClickBoost,
+						  handleUpgrades,
+						  upgradeCost,
+						  upgrade,
+						  incrementBigClick,
+						  bigClickCost,
+						  handleMediumCPS,
+						  mediumAutoValue
+					  }) {
 
 	return (
 		<>
@@ -22,8 +23,9 @@ export function Shop ({
 				<h2>Shop:</h2>
 				<Incrementors
 					handleCPS={handleCPS}
-					autoAmount={autoAmount}
 					autoValue={autoValue}
+					handleMediumCPS={handleMediumCPS}
+					mediumAutoValue={mediumAutoValue}
 				/>
 				<Upgrades
 					clickBoost={clickBoost}
