@@ -14,15 +14,15 @@ export function Header ({
 				<p id="toggle" onClick={titleMenuToggle}>
 					Settings
 				</p>
-				<div id="menus">
-					<p onClick={statsToggle}>Stats</p>
-					<p onClick={shopToggle}>Shop</p>
-					<p>option</p>
-					<p>option</p>
-					<p>option</p>
-					<p>option</p>
-					<p>option</p>
-				</div>
+				{/*<div id="menus">*/}
+				{/*	<p onClick={statsToggle}>Stats</p>*/}
+				{/*	<p onClick={shopToggle}>Shop</p>*/}
+				{/*	<p>option</p>*/}
+				{/*	<p>option</p>*/}
+				{/*	<p>option</p>*/}
+				{/*	<p>option</p>*/}
+				{/*	<p>option</p>*/}
+				{/*</div>*/}
 			</div>
 		</>
 	);

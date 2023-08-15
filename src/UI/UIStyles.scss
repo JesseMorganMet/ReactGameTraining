@@ -81,14 +81,18 @@
 		#option{
 			display: flex;
 			flex-direction: row;
-			justify-content: space-evenly;
+			justify-content: space-between;
 			margin:1%;
 			padding:1%;
 			background-color: #c5c5c5;
 			h2{
 				width:30%;
 			}
-
+			#toggleables{
+				padding:0;
+				margin:0;
+				text-align: center;
+			}
 		}
 	}
 	input {

@@ -167,6 +167,8 @@ export default function App () {
 						  setMediumAutoAmount={setMediumAutoAmount}
 						  mediumAutoValue={mediumAutoValue}
 						  setMediumAutoValue={setMediumAutoValue}
+						  statsToggle={statsToggle}
+						  shopToggle={shopToggle}
 				/>
 			}
 			<main>
@@ -180,6 +182,7 @@ export default function App () {
 							cPS={cPS}
 							clickModifier={clickModifier}
 							clickBoost={clickBoost}
+							statsToggle={statsToggle}
 						/>
 					)}
 					<Clicker
@@ -190,6 +193,8 @@ export default function App () {
 					/>
 					{isShopOpen && (
 						<Shop
+							shopToggle={shopToggle}
+
 							handleCPS={handleCPS}
 							autoValue={autoValue}
 							handleMediumCPS={handleMediumCPS}

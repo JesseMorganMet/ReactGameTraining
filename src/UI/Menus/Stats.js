@@ -8,11 +8,15 @@ export function Stats ({
 						   bigClick,
 						   clickBoost,
 						   autoAmount,
-						   mediumAutoAmount
+						   mediumAutoAmount,
+						   statsToggle
 					   }) {
 	return (
 		<>
 			<div id="shop" className="hangLeft">
+				<h3 id="toggle" onClick={statsToggle}>
+					X
+				</h3>
 				<h2>Stats</h2>
 				<div className="card">
 					<h2>Resources</h2>

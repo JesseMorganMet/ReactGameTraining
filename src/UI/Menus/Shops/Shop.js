@@ -14,12 +14,16 @@ export function Shop ({
 						  incrementBigClick,
 						  bigClickCost,
 						  handleMediumCPS,
-						  mediumAutoValue
+						  mediumAutoValue,
+						  shopToggle
 					  }) {
 
 	return (
 		<>
 			<div id="shop" className="hangRight">
+				<h3 id="toggle" onClick={shopToggle}>
+					X
+				</h3>
 				<h2>Shop</h2>
 				<Incrementors
 					handleCPS={handleCPS}

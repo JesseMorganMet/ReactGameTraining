@@ -31,6 +31,8 @@ export function Settings ({
 							  setMediumAutoAmount,
 							  mediumAutoValue,
 							  setMediumAutoValue,
+							  statsToggle,
+							  shopToggle
 						  }) {
 
 	let [save, setSave] = useState([]);
@@ -113,6 +115,17 @@ export function Settings ({
 						<button onClick={()=>setSaveData(save1.save1)}> Save 1 : {save1.save1.title} </button>
 						<button onClick={()=>setSaveData(save1.save2)}> Save 2 : {save1.save2.title} </button>
 						<button onClick={()=>setSaveData(save1.save3)}> Save 3 : {save1.save3.title} </button>
+					</div>
+					<div id="option">
+						<h2>Toggle:</h2>
+						<div id="toggleables">
+							<p>Stats</p>
+							<button onClick={statsToggle}>----------</button>
+						</div>
+						<div id="toggleables">
+							<p>Shop</p>
+							<button onClick={shopToggle}>----------</button>
+						</div>
 					</div>
 				</div>
 			</section>
