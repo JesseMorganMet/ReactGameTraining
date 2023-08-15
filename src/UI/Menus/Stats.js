@@ -13,6 +13,7 @@ export function Stats ({
 	return (
 		<>
 			<div id="stats">
+				<h2>Stats</h2>
 				<div>
 					<h2>Resources</h2>
 					<p>Clicks : {Math.round(click * 100) / 100}c</p>

@@ -4,7 +4,8 @@ import './AppContentStyles.scss';
 export default function Clicker ({
 									 click,
 									 setClick,
-									 clickBoost
+									 clickBoost,
+									 cPS
 								 }) {
 
 	// If Clicker is Clicked
@@ -17,7 +18,9 @@ export default function Clicker ({
 		<>
 			<div id="contentBody">
 				<div id="clicker" onClick={incrementClick}/>
-				<div id="activeDisplay"><p>{Math.round(click * 100) / 100}</p></div>
+				<div id="activeDisplay">
+					<p>{Math.round(click * 100) / 100} <br/>+ {cPS} /s</p>
+				</div>
 			</div>
 		</>
 	);

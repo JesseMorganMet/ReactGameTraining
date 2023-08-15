@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Header, Footer, Settings, Shop, Stats} from './UI';
 import Clicker from './AppContent/Clicker';
 import './style.scss';
-import save1 from './Data/save1.json';
 
 export default function App () {
 	const [isTitleMenuOpen, setTitleMenuOpen] = useState(true);
@@ -90,14 +89,14 @@ export default function App () {
 	}
 	function handleRealCPS () {
 		setStart(true);
-		setCPS((cPS = (mediumAutoAmount * 0.6) + (autoAmount * 0.2) * clickModifier))
+		setCPS((cPS = ((mediumAutoAmount * 0.6) + (autoAmount * 0.2)) * clickModifier))
 	}
 
 	useEffect(() => {
 		if (start) {
 			clearInterval(timerIdRef.current);
 			timerIdRef.current = setInterval(() => {
-				return handleIncrementation((autoAmount * 0.2) + (mediumAutoAmount * 0.6));
+				return handleIncrementation(cPS);
 			}, 1000);
 		} else {
 			clearInterval(timerIdRef.current);
@@ -105,7 +104,7 @@ export default function App () {
 		return () => {
 			clearInterval(timerIdRef.current);
 		};
-	}, [start, autoAmount]);
+	}, [start, cPS]);
 	// Shop
 
 	//Upgrade Stuff
@@ -114,6 +113,7 @@ export default function App () {
 			setClickModifier((clickModifier = clickModifier + upgrade));
 			handlePurchases(upgradeCost);
 			setUpgradeCost((upgradeCost = upgradeCost * 3.5));
+			handleRealCPS()
 		}
 	}
 
@@ -186,6 +186,7 @@ export default function App () {
 						click={click}
 						setClick={setClick}
 						clickBoost={clickBoost}
+						cPS={cPS}
 					/>
 					{isShopOpen && (
 						<Shop
